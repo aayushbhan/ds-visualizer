@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {BrowserRouter as Router,Route } from 'react-router-dom'
+import Home from './Components/Home'
+import Stack from './Components/DSComponents/Stack/Stack'
+import Queue from './Components/DSComponents/Queue/Queue'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <Router>
+          <Route exact path = "/" component = {Home} />
+          <div className="container">
+            <Route exact path = "/Stack" component = {Stack} />
+            <Route exact path = "/Queue" component = {Queue} /> 
+          </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
