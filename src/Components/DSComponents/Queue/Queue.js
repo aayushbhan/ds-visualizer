@@ -1,7 +1,7 @@
 import React from "react";
 import "./Queue.css";
 import Heading from "/home/aayush/ds-visualizer/src/Components/Heading";
-import Visualizer from "/home/aayush/ds-visualizer/src/Components/Visualizer";
+import QueueVisualizer from "/home/aayush/ds-visualizer/src/Components/DSComponents/Queue/QueueVisualizer";
 
 const termArray = ['Queue','Dequeue'];
 
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <div className="QueueContainer">
         <Heading />
-        <Visualizer structure="Queue" extra={termArray}/>
+         <QueueVisualizer structure="Queue" extra={termArray}/> 
       </div>
     );
   }

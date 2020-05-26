@@ -1,5 +1,5 @@
 import React from "react";
-import "./Visualizer.css";
+import "./StackVisualizer.css";
 
 const leftStyle = {
   padding: 10,
@@ -21,6 +21,8 @@ export default class Visualizer extends React.Component {
   updateStructure = () => {
     let box = document.getElementById(`${this.state.top}`);
     box.innerHTML = `${this.state.number}`;
+
+    this.updateTop(`${this.state.top}`);
   };
 
   //Creates the array structure
@@ -37,6 +39,13 @@ export default class Visualizer extends React.Component {
       x.id = i;
     }
     table.appendChild(row);
+
+    this.updateTop(`${this.state.top}`);
+  };
+
+  updateTop = (topParam) => {
+    let top = document.getElementById("topDisplay");
+    top.innerHTML = topParam;
   };
 
   //Called with the onClick event of the "submit" putton
@@ -74,11 +83,18 @@ export default class Visualizer extends React.Component {
   //gets called with the onClick event of the "pop" button
   removeHandler = () => {
     if (this.state.top > 0) {
-      let removal = document.getElementById(`${this.state.top - 1}`);
-      removal.innerHTML = "";
       this.setState({
         top: this.state.top - 1,
       });
+
+      let removal = document.getElementById(`${this.state.top - 1}`);
+      removal.innerHTML = "";
+      let tempnum = `${this.state.top}`;
+      if (tempnum - 2 >= 0) {
+        this.updateTop(`${this.state.top - 2}`);
+      } else {
+        this.updateTop(0);
+      }
     } else {
       alert(`${this.state.structure} is empty`);
     }
@@ -122,12 +138,18 @@ export default class Visualizer extends React.Component {
             </button>
           </div>
         </div>
-        <div className="VisualizingContainer">
-          <table id="tableContainer">
-            <tbody>
-              <tr></tr>
-            </tbody>
+        <div className="topContainer">
+          <table>
+            <caption id="caption">Top of {this.state.structure}</caption>
+            <tr>
+              <tbody>
+              <td id="topDisplay"></td>
+              </tbody>
+            </tr>
           </table>
+        </div>
+        <div className="visualizingContainer">
+          <table id="tableContainer" />
         </div>
       </div>
     );

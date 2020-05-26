@@ -1,7 +1,7 @@
 import React from "react";
 import "./Stack.css";
 import Heading from "/home/aayush/ds-visualizer/src/Components/Heading";
-import Visualizer from "/home/aayush/ds-visualizer/src/Components/Visualizer";
+import StackVisualizer from "/home/aayush/ds-visualizer/src/Components/DSComponents/Stack/StackVisualizer";
 
 const termArray = ['Push','Pop'];
 
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <div className="StackContainer">
         <Heading />
-        <Visualizer structure="Stack" extra={termArray}/>
+        <StackVisualizer structure="Stack" extra={termArray}/>
       </div>
     );
   }

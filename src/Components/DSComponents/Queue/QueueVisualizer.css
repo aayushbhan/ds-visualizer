@@ -4,10 +4,10 @@ div.MainContainer {
   width: 100%;
 }
 
-div.VisualizingContainer {
+div.visualizingContainer {
   position: absolute;
   transition: 0.5s ease;
-  top: 48%;
+  top: 58%;
   left: 03%;
 }
 
@@ -71,6 +71,10 @@ div.InputContainer {
   transition: 0.5s ease;
   top: 95%;
   left: 20%;
+  /* box-shadow:
+          0 0 10px 10px rgb(0, 195, 255), 
+          0 0 30px 20px rgb(0, 204, 255),
+          0 0 50px 30px rgba(0, 247, 255, 0.849);  */
 }
 
 #Arrow {
@@ -87,4 +91,28 @@ td {
   width: 60px;
   height: 60px;
   padding: 15px;
+}
+
+#frontDisplay {
+  position: absolute;
+  top: 38%;
+  left: 5%;
+}
+
+#endDisplay {
+  position: absolute;
+  top: 38%;
+  left: 25%;
+}
+
+#frontCaption {
+  position: absolute;
+  top: 35%;
+  left: 5%;
+}
+
+#endCaption {
+  position: absolute;
+  top: 35%;
+  left: 25%;
 }
