@@ -1,7 +1,5 @@
 import React from "react";
 import "./Visualizer.css";
-import arrow from "/home/aayush/ds-visualizer/src/Images/arrow.png";
-import ArrayComp from "./ArrayComp";
 
 const leftStyle = {
   padding: 10,
@@ -14,15 +12,14 @@ export default class Visualizer extends React.Component {
       structure: this.props.structure,
       size: "",
       number: "",
-      UID: -1,
+      top: 0,
       terms: this.props.extra,
-      arraycom: false,
     };
   }
 
   //Updates the array structure every time a number is pushed
   updateStructure = () => {
-    let box = document.getElementById(`${this.state.UID}`);
+    let box = document.getElementById(`${this.state.top}`);
     box.innerHTML = `${this.state.number}`;
   };
 
@@ -42,27 +39,23 @@ export default class Visualizer extends React.Component {
     table.appendChild(row);
   };
 
-  //Called when Size of stack button is clicked, changes the "arraycom" state to true.
+  //Called with the onClick event of the "submit" putton
   SizeHandler = (event) => {
     event.preventDefault();
-    this.setState({
-      //arraycom: !this.state.arraycom,
-      UID: this.state.UID + 1,
-    });
     this.createStructure();
   };
 
-  //Called when Push number button is clicked,
+  //Called with the onCick event of the "push" button
   NumberHandler = (event) => {
     event.preventDefault();
-    this.setState({
-      UID: this.state.UID + 1,
-    });
-    if(this.state.UID < this.state.size){
-    this.updateStructure();
-  } else{
-    alert(this.state.structure+" is full");
-  }
+    if (this.state.top < this.state.size) {
+      this.setState({
+        top: this.state.top + 1,
+      });
+      this.updateStructure();
+    } else {
+      alert(`${this.state.structure} overflow`);
+    }
   };
 
   //Updates the "size" state when the size is entered
@@ -76,6 +69,19 @@ export default class Visualizer extends React.Component {
     this.setState({
       number: document.getElementById("number").value,
     });
+  };
+
+  //gets called with the onClick event of the "pop" button
+  removeHandler = () => {
+    if (this.state.top > 0) {
+      let removal = document.getElementById(`${this.state.top - 1}`);
+      removal.innerHTML = "";
+      this.setState({
+        top: this.state.top - 1,
+      });
+    } else {
+      alert(`${this.state.structure} is empty`);
+    }
   };
 
   render() {
@@ -111,13 +117,11 @@ export default class Visualizer extends React.Component {
           </div>
           <div className="RemoveChildContainer">
             <h5>{this.state.terms[1]} Element</h5>
-            <button id="popBtn">{this.state.terms[1]}</button>
+            <button id="popBtn" onClick={this.removeHandler}>
+              {this.state.terms[1]}
+            </button>
           </div>
         </div>
-        {/* <div className="TopLabelContainer">
-          Top Of {this.state.structure}
-          <img id="Arrow" src={arrow} />
-        </div> */}
         <div className="VisualizingContainer">
           <table id="tableContainer">
             <tbody>
